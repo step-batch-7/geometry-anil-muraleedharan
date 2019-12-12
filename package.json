@@ -1,0 +1,23 @@
+{
+  "name": "geometry-anil-muraleedharan",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/step-batch-7/geometry-anil-muraleedharan.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/step-batch-7/geometry-anil-muraleedharan/issues"
+  },
+  "homepage": "https://github.com/step-batch-7/geometry-anil-muraleedharan#readme"
+}
