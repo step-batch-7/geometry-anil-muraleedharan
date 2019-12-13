@@ -1,9 +1,9 @@
-'use strict';
+('use strict');
 
 const { Line } = require('../src/line.js');
-const assert = require('assert');
+const { deepStrictEqual, strictEqual } = require('assert');
 
-const lineTest = function() {
+describe('Line', function() {
   describe('toString', function() {
     const testLine = new Line([1, 2], [4, 5]);
 
@@ -11,7 +11,7 @@ const lineTest = function() {
       const actual = testLine.toString();
       const expected = 'Line (1, 2)-------------(4, 5)';
 
-      assert.deepStrictEqual(actual, expected);
+      deepStrictEqual(actual, expected);
     });
   });
 
@@ -25,23 +25,21 @@ const lineTest = function() {
       const actual = line1.isEqualTo(line2);
       const expected = true;
 
-      assert.strictEqual(actual, expected);
+      strictEqual(actual, expected);
     });
 
     it('should invalidate if the line given and the existing lines are not equal', function() {
       const actual = line1.isEqualTo(line3);
       const expected = false;
 
-      assert.strictEqual(actual, expected);
+      strictEqual(actual, expected);
     });
 
     it('should invalidate if the object given is not a line', function() {
       const actual = line1.isEqualTo(lineLikeObject);
       const expected = false;
 
-      assert.strictEqual(actual, expected);
+      strictEqual(actual, expected);
     });
   });
-};
-
-lineTest();
+});
