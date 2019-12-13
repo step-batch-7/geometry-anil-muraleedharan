@@ -43,6 +43,37 @@ describe('Line', function() {
     });
   });
 
+  describe('isParallelTo', function() {
+    const line1 = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
+    const line2 = new Line({ x: 1, y: 4 }, { x: 4, y: 7 });
+    const line3 = new Line({ x: 1, y: 8 }, { x: 3, y: 5 });
+    const line4 = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
+    const lineLikeObject = { endA: { x: 1, y: 2 }, endB: { x: 4, y: 5 } };
+    it('should invalidate if the other object given is not an instance of Line', function() {
+      const actual = line1.isParallelTo(lineLikeObject);
+      const expected = false;
+      strictEqual(actual, expected);
+    });
+
+    it('should validate if the both lines are parallel', function() {
+      const actual = line1.isParallelTo(line2);
+      const expected = true;
+      strictEqual(actual, expected);
+    });
+
+    it('should invalidate if the both lines are not parallel', function() {
+      const actual = line1.isParallelTo(line3);
+      const expected = false;
+      strictEqual(actual, expected);
+    });
+
+    it('should validate if the both lines have same end points and slope', function() {
+      const actual = line1.isParallelTo(line4);
+      const expected = true;
+      strictEqual(actual, expected);
+    });
+  });
+
   describe('length', function() {
     it('should give zero as length if both end points of the line are same', function() {
       const line1 = new Line({ x: 1, y: 2 }, { x: 1, y: 2 });

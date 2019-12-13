@@ -27,6 +27,13 @@ class Line {
     return false;
   }
 
+  isParallelTo(other) {
+    if (other instanceof Line) {
+      return this.slope === other.slope;
+    }
+    return false;
+  }
+
   get length() {
     const xCordDifference = this.endA.x - this.endB.x;
     const yCordDifference = this.endA.y - this.endB.y;
