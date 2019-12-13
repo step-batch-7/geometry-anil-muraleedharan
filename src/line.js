@@ -1,32 +1,31 @@
 'use strict';
 
-const arePointsEqual = function(a, b) {
-  return a.x === b.x && a.y === b.y;
+const arePointsEqual = function(pointA, pointB) {
+  const areXsEqual = pointA.x === pointB.x;
+  const areYsEqual = pointA.y === pointB.y;
+  return areXsEqual && areYsEqual;
 };
 
 class Line {
-  constructor([x1, y1], [x2, y2]) {
-    this.endA = { x: x1, y: y1 };
-    this.endB = { x: x2, y: y2 };
+  constructor(endA, endB) {
+    this.endA = { x: endA.x, y: endA.y };
+    this.endB = { x: endB.x, y: endB.y };
   }
+
   toString() {
-    const endA = this.endA;
-    const endB = this.endB;
-    return `Line (${endA.x}, ${endA.y})-------------(${endB.x}, ${endB.y})`;
+    const endA = `(${this.endA.x}, ${this.endA.y})`;
+    const endB = `(${this.endB.x}, ${this.endB.y})`;
+    return `Line ${endA}-------------${endB}`;
   }
-  isEqualTo(otherLine) {
-    const otherLineEndA = otherLine.endA;
-    const otherLineEndB = otherLine.endB;
 
-    const endA = this.endA;
-    const endB = this.endB;
-
-    const isSameType = otherLine instanceof Line;
-    const areEndAEqual = arePointsEqual(endA, otherLineEndA);
-    const areEndBEqual = arePointsEqual(endB, otherLineEndB);
-
-    return isSameType && areEndAEqual && areEndBEqual;
+  isEqualTo(other) {
+    if (other instanceof Line) {
+      const areEndAEqual = arePointsEqual(this.endA, other.endA);
+      const areEndBEqual = arePointsEqual(this.endB, other.endB);
+      return areEndAEqual && areEndBEqual;
+    }
+    return false;
   }
 }
 
-module.exports = { Line };
+module.exports = Line;
