@@ -68,4 +68,36 @@ describe('Line', function() {
       approximately(line3.length, expectedLength, 0.0000000000000001);
     });
   });
+
+  describe('slope', function() {
+    it('should find the slope of the given line if it is positive', function() {
+      const line1 = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
+      const expectedSlope = 1;
+      strictEqual(line1.slope, expectedSlope);
+    });
+
+    it('should find the slope of the given line if it is negative', function() {
+      const line1 = new Line({ x: 1, y: 5 }, { x: 4, y: 2 });
+      const expectedSlope = -1;
+      strictEqual(line1.slope, expectedSlope);
+    });
+
+    it('should give zero as slope if y coordinates of both ends of the line are equal', function() {
+      const line1 = new Line({ x: 1, y: 2 }, { x: 4, y: 2 });
+      const expectedSlope = 0;
+      strictEqual(line1.slope, expectedSlope);
+    });
+
+    it('should give "Infinity" as slope if x-cords of both ends are equal and difference of y-cords is positive', function() {
+      const line1 = new Line({ x: 1, y: 6 }, { x: 1, y: 2 });
+      const expectedSlope = Infinity;
+      strictEqual(line1.slope, expectedSlope);
+    });
+
+    it('should give "-Infinity" as slope if x-cords of both ends are equal and difference of y-cords is negative', function() {
+      const line1 = new Line({ x: 1, y: 2 }, { x: 1, y: 6 });
+      const expectedSlope = -Infinity;
+      strictEqual(line1.slope, expectedSlope);
+    });
+  });
 });

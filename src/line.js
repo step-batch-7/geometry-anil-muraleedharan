@@ -34,6 +34,12 @@ class Line {
     const yCordDifferenceSquare = yCordDifference * yCordDifference;
     return Math.sqrt(xCordDifferenceSquare + yCordDifferenceSquare);
   }
+
+  get slope() {
+    const xCordDifference = this.endA.x - this.endB.x;
+    const yCordDifference = this.endA.y - this.endB.y;
+    return yCordDifference / xCordDifference;
+  }
 }
 
 module.exports = Line;
