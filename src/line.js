@@ -26,6 +26,14 @@ class Line {
     }
     return false;
   }
+
+  get length() {
+    const xCordDifference = this.endA.x - this.endB.x;
+    const yCordDifference = this.endA.y - this.endB.y;
+    const xCordDifferenceSquare = xCordDifference * xCordDifference;
+    const yCordDifferenceSquare = yCordDifference * yCordDifference;
+    return Math.sqrt(xCordDifferenceSquare + yCordDifferenceSquare);
+  }
 }
 
 module.exports = Line;

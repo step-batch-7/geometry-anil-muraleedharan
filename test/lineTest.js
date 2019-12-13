@@ -42,4 +42,29 @@ describe('Line', function() {
       strictEqual(actual, expected);
     });
   });
+  describe('length', function() {
+    it('should give zero as length if both end points of the line are same', function() {
+      const line1 = new Line({ x: 1, y: 2 }, { x: 1, y: 2 });
+      const expectedLength = 0;
+      strictEqual(line1.length, expectedLength);
+    });
+
+    it('should give a non-zero positive length if both end points of the line are not same', function() {
+      const line2 = new Line({ x: 0, y: 2 }, { x: 0, y: 5 });
+      const expectedLength = 3;
+      strictEqual(line2.length, expectedLength);
+    });
+
+    it('should find length if one of the end point of the line is in negative region', function() {
+      const line3 = new Line({ x: 0, y: -2 }, { x: 0, y: 4 });
+      const expectedLength = 6;
+      strictEqual(line3.length, expectedLength);
+    });
+
+    it('should find length if the distance between end points is a floating point value', function() {
+      const line3 = new Line({ x: 0, y: 2 }, { x: 0, y: 7.232 });
+      const expectedLength = 5.232;
+      strictEqual(line3.length, expectedLength);
+    });
+  });
 });
