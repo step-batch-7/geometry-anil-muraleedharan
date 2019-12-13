@@ -1,7 +1,7 @@
 'use strict';
 
 const Line = require('../src/line.js');
-const { deepStrictEqual, strictEqual } = require('assert');
+const { deepStrictEqual, strictEqual, approximately } = require('chai').assert;
 
 describe('Line', function() {
   describe('toString', function() {
@@ -42,6 +42,7 @@ describe('Line', function() {
       strictEqual(actual, expected);
     });
   });
+
   describe('length', function() {
     it('should give zero as length if both end points of the line are same', function() {
       const line1 = new Line({ x: 1, y: 2 }, { x: 1, y: 2 });
@@ -64,7 +65,7 @@ describe('Line', function() {
     it('should find length if the distance between end points is a floating point value', function() {
       const line3 = new Line({ x: 0, y: 2 }, { x: 0, y: 7.232 });
       const expectedLength = 5.232;
-      strictEqual(line3.length, expectedLength);
+      approximately(line3.length, expectedLength, 0.0000000000000001);
     });
   });
 });
