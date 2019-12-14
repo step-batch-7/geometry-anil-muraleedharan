@@ -12,6 +12,10 @@ const getMidPoint = function(pointA, pointB) {
   return { x: midXCord, y: midYCord };
 };
 
+const getYIntersect = function(point, slope) {
+  return point.y - slope * point.x;
+};
+
 class Line {
   constructor(endA, endB) {
     this.endA = { x: endA.x, y: endA.y };
@@ -45,6 +49,11 @@ class Line {
     const HalfLine1 = new Line(this.endA, midPoint);
     const HalfLine2 = new Line(midPoint, this.endB);
     return [HalfLine1, HalfLine2];
+  }
+
+  findX(yCord) {
+    const yIntersect = getYIntersect(this.endA, this.slope);
+    return (yCord - yIntersect) / this.slope;
   }
 
   get length() {

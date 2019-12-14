@@ -141,4 +141,11 @@ describe('Line', function() {
       deepStrictEqual(bigLine.split(), [firstHalf, secondHalf]);
     });
   });
+
+  describe('findX', function() {
+    it('should give the x-cord corresponding to the given y-cord if it is in line', function() {
+      const line1 = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
+      strictEqual(line1.findX(4), 3);
+    });
+  });
 });
