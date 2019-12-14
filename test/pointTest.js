@@ -24,4 +24,23 @@ describe('Point', function() {
       strictEqual(testPoint.visit(sampleOperation2), 6);
     });
   });
+
+  describe('isEqualTo', function() {
+    const point1 = new Point(2, 3);
+    const point2 = new Point(2, 3);
+    const point3 = new Point(4, 5);
+    const pointLikeObject = { x: 2, y: 3 };
+
+    it('should invalidate if the other object given is not an instance of point', function() {
+      strictEqual(point1.isEqualTo(pointLikeObject), false);
+    });
+
+    it('should validate if the coordinates of both the points are same', function() {
+      strictEqual(point1.isEqualTo(point2), true);
+    });
+
+    it('should invalidate if the coordinates of both the points are not same', function() {
+      strictEqual(point1.isEqualTo(point3), false);
+    });
+  });
 });
