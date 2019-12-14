@@ -9,7 +9,7 @@ describe('Line', function() {
 
     it('should give the proper representation of a line', function() {
       const actual = testLine.toString();
-      const expected = 'Line (1, 2)-------------(4, 5)';
+      const expected = '[Line (1,2) to (4,5)]';
 
       deepStrictEqual(actual, expected);
     });
