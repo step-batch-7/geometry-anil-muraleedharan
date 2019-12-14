@@ -131,4 +131,14 @@ describe('Line', function() {
       strictEqual(line1.slope, expectedSlope);
     });
   });
+
+  describe('split', function() {
+    it('should give a pair of line by dividing the given line into 2 equal parts', function() {
+      const bigLine = new Line({ x: 1, y: 2 }, { x: 5, y: 6 });
+      const firstHalf = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
+      const secondHalf = new Line({ x: 3, y: 4 }, { x: 5, y: 6 });
+
+      deepStrictEqual(bigLine.split(), [firstHalf, secondHalf]);
+    });
+  });
 });
