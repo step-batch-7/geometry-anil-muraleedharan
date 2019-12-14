@@ -43,4 +43,11 @@ describe('Point', function() {
       strictEqual(point1.isEqualTo(point3), false);
     });
   });
+
+  describe('clone', function() {
+    const point1 = new Point(2, 3);
+    it('should give an exact copy of the given point', function() {
+      deepStrictEqual(point1.clone(), point1);
+    });
+  });
 });

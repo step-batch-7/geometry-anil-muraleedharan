@@ -20,6 +20,10 @@ class Point {
     }
     return false;
   }
+
+  clone() {
+    return new Point(this.x, this.y);
+  }
 }
 
 module.exports = Point;
