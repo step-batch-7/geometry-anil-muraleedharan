@@ -56,6 +56,11 @@ class Line {
     return (yCord - yIntersect) / this.slope;
   }
 
+  findY(xCord) {
+    const yIntersect = getYIntersect(this.endA, this.slope);
+    return this.slope * xCord + yIntersect;
+  }
+
   get length() {
     const xCordDifference = this.endA.x - this.endB.x;
     const yCordDifference = this.endA.y - this.endB.y;
