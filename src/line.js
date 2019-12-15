@@ -61,6 +61,16 @@ class Line {
     return this.slope * xCord + yIntersect;
   }
 
+  hasPoint(point) {
+    const maxOfXCords = Math.max(this.endA.x, this.endB.x);
+    const minOfXCords = Math.min(this.endA.x, this.endB.x);
+    const maxOfYCords = Math.max(this.endA.y, this.endB.y);
+    const minOfYCords = Math.min(this.endA.y, this.endB.y);
+    const isXCordInLine = point.x <= maxOfXCords && point.x >= minOfXCords;
+    const isYCordInLine = point.y <= maxOfYCords && point.y >= minOfYCords;
+    return isXCordInLine && isYCordInLine;
+  }
+
   get length() {
     const xCordDifference = this.endA.x - this.endB.x;
     const yCordDifference = this.endA.y - this.endB.y;
