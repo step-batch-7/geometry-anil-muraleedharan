@@ -2,7 +2,12 @@
 
 const Line = require('../src/line');
 const Point = require('../src/point');
-const { deepStrictEqual, strictEqual, approximately } = require('chai').assert;
+const {
+  deepStrictEqual,
+  strictEqual,
+  approximately,
+  isNaN
+} = require('chai').assert;
 
 describe('Line', function() {
   describe('toString', function() {
@@ -148,12 +153,20 @@ describe('Line', function() {
       const line1 = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
       strictEqual(line1.findX(4), 3);
     });
+    it('should give NaN if the given y-cord is not in line', function() {
+      const line1 = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
+      isNaN(line1.findX(7));
+    });
   });
 
   describe('findY', function() {
     it('should give the y-cord corresponding to the given x-cord if it is in line', function() {
       const line1 = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
       strictEqual(line1.findY(3), 4);
+    });
+    it('should give NaN if the given x-cord is not in line', function() {
+      const line1 = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
+      isNaN(line1.findY(7));
     });
   });
 

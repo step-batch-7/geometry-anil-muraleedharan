@@ -16,6 +16,12 @@ const getYIntersect = function(point, slope) {
   return point.y - slope * point.x;
 };
 
+const isValueInRange = function(limit1, limit2, value) {
+  const minLimit = Math.min(limit1, limit2);
+  const maxLimit = Math.max(limit1, limit2);
+  return value <= maxLimit && value >= minLimit;
+};
+
 class Line {
   constructor(endA, endB) {
     this.endA = { x: endA.x, y: endA.y };
@@ -52,22 +58,24 @@ class Line {
   }
 
   findX(yCord) {
-    const yIntersect = getYIntersect(this.endA, this.slope);
-    return (yCord - yIntersect) / this.slope;
+    if (isValueInRange(this.endA.y, this.endB.y, yCord)) {
+      const yIntersect = getYIntersect(this.endA, this.slope);
+      return (yCord - yIntersect) / this.slope;
+    }
+    return NaN;
   }
 
   findY(xCord) {
-    const yIntersect = getYIntersect(this.endA, this.slope);
-    return this.slope * xCord + yIntersect;
+    if (isValueInRange(this.endA.x, this.endB.x, xCord)) {
+      const yIntersect = getYIntersect(this.endA, this.slope);
+      return this.slope * xCord + yIntersect;
+    }
+    return NaN;
   }
 
   hasPoint(point) {
-    const maxOfXCords = Math.max(this.endA.x, this.endB.x);
-    const minOfXCords = Math.min(this.endA.x, this.endB.x);
-    const maxOfYCords = Math.max(this.endA.y, this.endB.y);
-    const minOfYCords = Math.min(this.endA.y, this.endB.y);
-    const isXCordInLine = point.x <= maxOfXCords && point.x >= minOfXCords;
-    const isYCordInLine = point.y <= maxOfYCords && point.y >= minOfYCords;
+    const isXCordInLine = isValueInRange(this.endA.x, this.endB.x, point.x);
+    const isYCordInLine = isValueInRange(this.endA.y, this.endB.y, point.y);
     return isXCordInLine && isYCordInLine;
   }
 
