@@ -18,6 +18,10 @@ const isValueInRange = function(limit1, limit2, value) {
   return value <= maxLimit && value >= minLimit;
 };
 
+const getCoordinate = function(distanceRatio, end1Cord, end2Cord) {
+  return (1 - distanceRatio) * end1Cord + distanceRatio * end2Cord;
+};
+
 class Line {
   constructor(endA, endB) {
     this.endA = new Point(endA.x, endA.y);
@@ -81,11 +85,14 @@ class Line {
 
   findPointFromStart(distance) {
     const distanceRatio = distance / this.length;
-    const xCord =
-      (1 - distanceRatio) * this.endA.x + distanceRatio * this.endB.x;
-    const yCord =
-      (1 - distanceRatio) * this.endA.y + distanceRatio * this.endB.y;
+    const xCord = getCoordinate(distanceRatio, this.endA.x, this.endB.x);
+    const yCord = getCoordinate(distanceRatio, this.endA.y, this.endB.y);
     return new Point(xCord, yCord);
+  }
+
+  findPointFromEnd(distance) {
+    const reversedLine = new Line(this.endB, this.endA);
+    return reversedLine.findPointFromStart(distance);
   }
 
   get length() {

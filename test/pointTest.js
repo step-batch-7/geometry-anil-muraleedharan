@@ -6,7 +6,8 @@ const {
   strictEqual,
   deepStrictEqual,
   approximately,
-  isNaN
+  isNaN,
+  isOk
 } = require('chai').assert;
 
 describe('Point', function() {
@@ -53,7 +54,7 @@ describe('Point', function() {
   describe('clone', function() {
     const point1 = new Point(2, 3);
     it('should give an exact copy of the given point', function() {
-      deepStrictEqual(point1.clone(), point1);
+      isOk(point1.isEqualTo(point1.clone()));
     });
   });
 
