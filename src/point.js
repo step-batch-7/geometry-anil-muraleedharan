@@ -21,6 +21,17 @@ class Point {
     return false;
   }
 
+  findDistanceTo(other) {
+    if (other instanceof Point) {
+      const xCordDifference = this.x - other.x;
+      const yCordDifference = this.y - other.y;
+      const xCordDifferenceSquare = xCordDifference * xCordDifference;
+      const yCordDifferenceSquare = yCordDifference * yCordDifference;
+      return Math.sqrt(xCordDifferenceSquare + yCordDifferenceSquare);
+    }
+    return NaN;
+  }
+
   clone() {
     return new Point(this.x, this.y);
   }

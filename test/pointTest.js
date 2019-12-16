@@ -1,7 +1,12 @@
 'use strict';
 
 const Point = require('../src/point');
-const { strictEqual, deepStrictEqual } = require('chai').assert;
+const {
+  strictEqual,
+  deepStrictEqual,
+  approximately,
+  isNaN
+} = require('chai').assert;
 
 describe('Point', function() {
   describe('toString', function() {
@@ -48,6 +53,46 @@ describe('Point', function() {
     const point1 = new Point(2, 3);
     it('should give an exact copy of the given point', function() {
       deepStrictEqual(point1.clone(), point1);
+    });
+  });
+
+  describe('findDistanceTo', function() {
+    it('should give zero as Distance if both points are same', function() {
+      const point1 = new Point(1, 2);
+      const point2 = new Point(1, 2);
+      const expectedDistance = 0;
+      strictEqual(point1.findDistanceTo(point2), expectedDistance);
+    });
+
+    it('should give a non-zero positive Distance if both points are not same', function() {
+      const point1 = new Point(1, 2);
+      const point2 = new Point(1, 5);
+      const expectedDistance = 3;
+      strictEqual(point1.findDistanceTo(point2), expectedDistance);
+    });
+
+    it('should find Distance if one of the point of is in negative region', function() {
+      const point1 = new Point(1, -2);
+      const point2 = new Point(1, 5);
+      const expectedDistance = 7;
+      strictEqual(point1.findDistanceTo(point2), expectedDistance);
+    });
+
+    it('should find Distance if it is a floating point value', function() {
+      const point1 = new Point(1, 2);
+      const point2 = new Point(1, 7.232);
+      const expectedDistance = 5.232;
+      approximately(
+        point1.findDistanceTo(point2),
+        expectedDistance,
+        0.0000000000000001
+      );
+    });
+
+    it('should give NaN as distance if the given object is not an instance of point', function() {
+      const point1 = new Point(1, 2);
+      const pointLikeObject = { x: 1, y: 5 };
+      isNaN(point1.findDistanceTo(pointLikeObject));
     });
   });
 });
