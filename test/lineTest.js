@@ -183,4 +183,12 @@ describe('Line', function() {
       strictEqual(line1.hasPoint(point1), false);
     });
   });
+
+  describe('findPointFromStart', function() {
+    it('should find a point with a particular distance from the start of the line', function() {
+      const line1 = new Line({ x: 1, y: 2 }, { x: 1, y: 8 });
+      const expectedPoint = new Point(1, 4);
+      deepStrictEqual(line1.findPointFromStart(2), expectedPoint);
+    });
+  });
 });

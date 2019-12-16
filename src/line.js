@@ -1,5 +1,7 @@
 'use strict';
 
+const Point = require('./point');
+
 const arePointsEqual = function(pointA, pointB) {
   const areXsEqual = pointA.x === pointB.x;
   const areYsEqual = pointA.y === pointB.y;
@@ -77,6 +79,15 @@ class Line {
     const isXCordInLine = isValueInRange(this.endA.x, this.endB.x, point.x);
     const isYCordInLine = isValueInRange(this.endA.y, this.endB.y, point.y);
     return isXCordInLine && isYCordInLine;
+  }
+
+  findPointFromStart(distance) {
+    const distanceRatio = distance / this.length;
+    const xCord =
+      (1 - distanceRatio) * this.endA.x + distanceRatio * this.endB.x;
+    const yCord =
+      (1 - distanceRatio) * this.endA.y + distanceRatio * this.endB.y;
+    return new Point(xCord, yCord);
   }
 
   get length() {

@@ -1,6 +1,7 @@
 'use strict';
 
 const Point = require('../src/point');
+const Line = require('../src/line');
 const {
   strictEqual,
   deepStrictEqual,
@@ -93,6 +94,20 @@ describe('Point', function() {
       const point1 = new Point(1, 2);
       const pointLikeObject = { x: 1, y: 5 };
       isNaN(point1.findDistanceTo(pointLikeObject));
+    });
+  });
+
+  describe('isOn', function() {
+    it('should validate if the point is in the given line', function() {
+      const line1 = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
+      const point1 = new Point(2, 3);
+      strictEqual(point1.isOn(line1), true);
+    });
+
+    it('should invalidate if the point is not in the given line', function() {
+      const line1 = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
+      const point1 = new Point(7, 3);
+      strictEqual(point1.isOn(line1), false);
     });
   });
 });

@@ -1,5 +1,11 @@
 'use strict';
 
+const isValueInRange = function(limit1, limit2, value) {
+  const minLimit = Math.min(limit1, limit2);
+  const maxLimit = Math.max(limit1, limit2);
+  return value <= maxLimit && value >= minLimit;
+};
+
 class Point {
   constructor(xCord, yCord) {
     this.x = xCord;
@@ -30,6 +36,12 @@ class Point {
       return Math.sqrt(xCordDifferenceSquare + yCordDifferenceSquare);
     }
     return NaN;
+  }
+
+  isOn(line) {
+    const isXCordInLine = isValueInRange(line.endA.x, line.endB.x, this.x);
+    const isYCordInLine = isValueInRange(line.endA.y, line.endB.y, this.y);
+    return isXCordInLine && isYCordInLine;
   }
 
   clone() {
