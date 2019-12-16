@@ -23,9 +23,16 @@ describe('Circle', function() {
     });
 
     it('should invalidate if the object given is not an instance of circle', function() {
-      const circle1 = new Circle({ x: 1, y: 2 });
+      const circle1 = new Circle({ x: 1, y: 2 }, 5);
       const circleLikeObject = { centre: { x: 1, y: 2 }, radius: 5 };
       isNotOk(circle1.isEqualTo(circleLikeObject));
+    });
+  });
+
+  describe('area', function() {
+    it('should give the area of the circle', function() {
+      const circle1 = new Circle({ x: 1, y: 2 }, 5);
+      strictEqual(circle1.area, 78.53981633974483);
     });
   });
 });
