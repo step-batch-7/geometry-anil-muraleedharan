@@ -35,4 +35,11 @@ describe('Circle', function() {
       strictEqual(circle1.area, 78.53981633974483);
     });
   });
+
+  describe('perimeter', function() {
+    it('should give the perimeter of the circle', function() {
+      const circle1 = new Circle({ x: 1, y: 2 }, 5);
+      strictEqual(circle1.perimeter, 31.41592653589793);
+    });
+  });
 });
