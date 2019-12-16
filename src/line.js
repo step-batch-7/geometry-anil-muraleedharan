@@ -54,9 +54,9 @@ class Line {
 
   split() {
     const midPoint = getMidPoint(this.endA, this.endB);
-    const HalfLine1 = new Line(this.endA, midPoint);
-    const HalfLine2 = new Line(midPoint, this.endB);
-    return [HalfLine1, HalfLine2];
+    const halfLine1 = new Line(this.endA, midPoint);
+    const halfLine2 = new Line(midPoint, this.endB);
+    return [halfLine1, halfLine2];
   }
 
   findX(yCord) {
@@ -76,9 +76,12 @@ class Line {
   }
 
   hasPoint(point) {
+    const yIntersect = getYIntersect(this.endA, this.slope);
+    const isPointSatisfiesLineEqn =
+      point.y === this.slope * point.x + yIntersect;
     const isXCordInLine = isValueInRange(this.endA.x, this.endB.x, point.x);
     const isYCordInLine = isValueInRange(this.endA.y, this.endB.y, point.y);
-    return isXCordInLine && isYCordInLine;
+    return isXCordInLine && isYCordInLine && isPointSatisfiesLineEqn;
   }
 
   findPointFromStart(distance) {

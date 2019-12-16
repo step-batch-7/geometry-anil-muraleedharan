@@ -6,7 +6,8 @@ const {
   deepStrictEqual,
   strictEqual,
   approximately,
-  isNaN
+  isNaN,
+  isNull
 } = require('chai').assert;
 
 describe('Line', function() {
@@ -178,8 +179,8 @@ describe('Line', function() {
     });
 
     it('should invalidate if the given point is not in the line', function() {
-      const line1 = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
-      const point1 = new Point(7, 3);
+      const line1 = new Line({ x: 2, y: 2 }, { x: 4, y: 4 });
+      const point1 = new Point(2, 3);
       strictEqual(line1.hasPoint(point1), false);
     });
   });
