@@ -2,12 +2,6 @@
 
 const Point = require('./point');
 
-const arePointsEqual = function(pointA, pointB) {
-  const areXsEqual = pointA.x === pointB.x;
-  const areYsEqual = pointA.y === pointB.y;
-  return areXsEqual && areYsEqual;
-};
-
 const getMidPoint = function(pointA, pointB) {
   const midXCord = (pointA.x + pointB.x) / 2;
   const midYCord = (pointA.y + pointB.y) / 2;
@@ -26,8 +20,8 @@ const isValueInRange = function(limit1, limit2, value) {
 
 class Line {
   constructor(endA, endB) {
-    this.endA = { x: endA.x, y: endA.y };
-    this.endB = { x: endB.x, y: endB.y };
+    this.endA = new Point(endA.x, endA.y);
+    this.endB = new Point(endB.x, endB.y);
   }
 
   toString() {
@@ -38,8 +32,9 @@ class Line {
 
   isEqualTo(other) {
     if (other instanceof Line) {
-      const areEndAEqual = arePointsEqual(this.endA, other.endA);
-      const areEndBEqual = arePointsEqual(this.endB, other.endB);
+      const areEndAEqual = this.endA.isEqualTo(other.endA);
+      const areEndBEqual = this.endB.isEqualTo(other.endB);
+
       return areEndAEqual && areEndBEqual;
     }
     return false;
