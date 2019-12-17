@@ -30,6 +30,13 @@ class Circle {
     return new Circle(newCentre, this.radius);
   }
 
+  covers(point) {
+    if (point instanceof Point) {
+      return this.centre.findDistanceTo(point) <= this.radius;
+    }
+    return false;
+  }
+
   get area() {
     return Math.PI * this.radius * this.radius;
   }

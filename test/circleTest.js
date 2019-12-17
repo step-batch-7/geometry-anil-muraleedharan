@@ -72,4 +72,24 @@ describe('Circle', function() {
       isOk(circle2.isEqualTo(circle1.moveTo(newCentre)));
     });
   });
+
+  describe('covers', function() {
+    it('should validate if the given point is inside the circle', function() {
+      const circle = new Circle({ x: 0, y: 0 }, 5);
+      const point = new Point(1, 2);
+      isOk(circle.covers(point));
+    });
+
+    it('should invalidate if the given object is not an instance of point', function() {
+      const circle = new Circle({ x: 0, y: 0 }, 5);
+      const pointLikeObject = { x: 0, y: 5 };
+      isNotOk(circle.covers(pointLikeObject));
+    });
+
+    it('should invalidate if the given point is not inside the circle', function() {
+      const circle = new Circle({ x: 0, y: 0 }, 5);
+      const point = new Point(0, 8);
+      isNotOk(circle.covers(point));
+    });
+  });
 });
