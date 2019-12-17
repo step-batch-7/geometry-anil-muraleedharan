@@ -15,6 +15,12 @@ const getSides = function(pointA, pointC) {
   return { AB: ab, BC: bc, CD: cd, DA: da };
 };
 
+const isValueInRange = function([limit1, limit2], value) {
+  const minLimit = Math.min(limit1, limit2);
+  const maxLimit = Math.max(limit1, limit2);
+  return value < maxLimit && value > minLimit;
+};
+
 class Rectangle {
   constructor(diagonalEndA, diagonalEndC) {
     this.diagonalEndA = new Point(diagonalEndA.x, diagonalEndA.y);
@@ -44,6 +50,13 @@ class Rectangle {
       sides.CD.hasPoint(point) ||
       sides.DA.hasPoint(point)
     );
+  }
+
+  covers(point) {
+    if (!(point instanceof Point)) return false;
+    const xRange = [this.diagonalEndA.x, this.diagonalEndC.x];
+    const yRange = [this.diagonalEndA.y, this.diagonalEndC.y];
+    return isValueInRange(xRange, point.x) && isValueInRange(yRange, point.y);
   }
 
   get area() {

@@ -73,4 +73,30 @@ describe('Rectangle', function() {
       isNotOk(rectangle.hasPoint(point));
     });
   });
+
+  describe('covers', function() {
+    it('should invalidate if the given object is not an instance of Point', function() {
+      const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 4, y: 5 });
+      const pointLikeObject = { x: 0, y: 5 };
+      isNotOk(rectangle.covers(pointLikeObject));
+    });
+
+    it('should validate if the given point is inside the rectangle', function() {
+      const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 4, y: 5 });
+      const point = new Point(2, 3);
+      isOk(rectangle.covers(point));
+    });
+
+    it('should invalidate if the given point is on the circumference of the rectangle', function() {
+      const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 4, y: 5 });
+      const point = new Point(1, 3);
+      isNotOk(rectangle.covers(point));
+    });
+
+    it('should invalidate if the given point is outside the rectangle', function() {
+      const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 4, y: 5 });
+      const point = new Point(5, 8);
+      isNotOk(rectangle.covers(point));
+    });
+  });
 });
