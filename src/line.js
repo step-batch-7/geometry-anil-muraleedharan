@@ -18,10 +18,6 @@ const isValueInRange = function(limit1, limit2, value) {
   return value <= maxLimit && value >= minLimit;
 };
 
-const getCoordinate = function(distanceRatio, end1Cord, end2Cord) {
-  return (1 - distanceRatio) * end1Cord + distanceRatio * end2Cord;
-};
-
 const areCollinear = function(pointA, pointB, pointC) {
   const [x1, y1] = [pointA.x, pointA.y];
   const [x2, y2] = [pointB.x, pointB.y];
@@ -42,7 +38,7 @@ class Line {
   }
 
   isEqualTo(other) {
-    if (!other instanceof Line) return false;
+    if (!(other instanceof Line)) return false;
     return (
       (this.endA.isEqualTo(other.endA) && this.endB.isEqualTo(other.endB)) ||
       (this.endA.isEqualTo(other.endB) && this.endB.isEqualTo(other.endA))
@@ -50,7 +46,7 @@ class Line {
   }
 
   isParallelTo(other) {
-    if (!other instanceof Line) return false;
+    if (!(other instanceof Line)) return false;
     return (
       this.slope === other.slope &&
       !areCollinear(this.endA, this.endB, other.endA)
@@ -85,10 +81,10 @@ class Line {
   }
 
   findPointFromStart(distance) {
-    const distanceRatio = distance / this.length;
-    if (!isValueInRange(0, 1, distanceRatio)) return null;
-    const xCord = getCoordinate(distanceRatio, this.endA.x, this.endB.x);
-    const yCord = getCoordinate(distanceRatio, this.endA.y, this.endB.y);
+    const lengthRatio = distance / this.length;
+    if (!isValueInRange(0, 1, lengthRatio)) return null;
+    const xCord = (1 - lengthRatio) * this.endA.x + lengthRatio * this.endB.x;
+    const yCord = (1 - lengthRatio) * this.endA.y + lengthRatio * this.endB.y;
     return new Point(xCord, yCord);
   }
 
@@ -102,9 +98,9 @@ class Line {
   }
 
   get slope() {
-    const xCordDifference = this.endB.x - this.endA.x;
-    const yCordDifference = this.endB.y - this.endA.y;
-    return yCordDifference / xCordDifference;
+    const slope = (this.endB.y - this.endA.y) / (this.endB.x - this.endA.x);
+    if (slope === -Infinity) return Infinity;
+    return slope;
   }
 }
 

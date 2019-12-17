@@ -33,7 +33,7 @@ describe('Line', function() {
 
     it('should validate if the other line given and the existing lines are equal but in reverse order', function() {
       const line1 = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
-      const line2 = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
+      const line2 = new Line({ x: 4, y: 5 }, { x: 1, y: 2 });
       isOk(line1.isEqualTo(line2));
     });
 
@@ -123,7 +123,7 @@ describe('Line', function() {
 
     it('Should give infinity when the line is parallel to y-axis', () => {
       let line = new Line({ x: 3, y: 8 }, { x: 3, y: 6 });
-      strictEqual(line.slope, -Infinity);
+      strictEqual(line.slope, Infinity);
 
       line = new Line({ x: 4, y: 3 }, { x: 4, y: 4 });
       strictEqual(line.slope, Infinity);
