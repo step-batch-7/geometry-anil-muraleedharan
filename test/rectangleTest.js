@@ -9,4 +9,11 @@ describe('Rectangle', function() {
       strictEqual(rectangle.toString(), '[Rectangle (1, 1) to (2, 3)]');
     });
   });
+
+  describe('area', function() {
+    it('should give the area of the rectangle', function() {
+      const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 4, y: 5 });
+      strictEqual(rectangle.area, 12);
+    });
+  });
 });
