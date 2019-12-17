@@ -91,5 +91,11 @@ describe('Circle', function() {
       const point = new Point(0, 8);
       isNotOk(circle.covers(point));
     });
+
+    it('should invalidate if the given point is on the circumference circle', function() {
+      const circle = new Circle({ x: 0, y: 0 }, 5);
+      const point = new Point(0, 5);
+      isNotOk(circle.covers(point));
+    });
   });
 });
