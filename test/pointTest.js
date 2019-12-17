@@ -41,15 +41,15 @@ describe('Point', function() {
     const pointLikeObject = { x: 2, y: 3 };
 
     it('should invalidate if the other object given is not an instance of point', function() {
-      strictEqual(point1.isEqualTo(pointLikeObject), false);
+      isNotOk(point1.isEqualTo(pointLikeObject));
     });
 
     it('should validate if the coordinates of both the points are same', function() {
-      strictEqual(point1.isEqualTo(point2), true);
+      isOk(point1.isEqualTo(point2));
     });
 
     it('should invalidate if the coordinates of both the points are not same', function() {
-      strictEqual(point1.isEqualTo(point3), false);
+      isNotOk(point1.isEqualTo(point3));
     });
   });
 
@@ -104,13 +104,13 @@ describe('Point', function() {
     it('should validate if the point is in the given line', function() {
       const line1 = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
       const point1 = new Point(2, 3);
-      strictEqual(point1.isOn(line1), true);
+      isOk(point1.isOn(line1));
     });
 
     it('should invalidate if the point is not in the given line', function() {
       const line1 = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
       const point1 = new Point(7, 3);
-      strictEqual(point1.isOn(line1), false);
+      isNotOk(point1.isOn(line1));
     });
 
     it('should validate if the point is on the circumference of the given circle', function() {

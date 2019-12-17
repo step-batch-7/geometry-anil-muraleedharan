@@ -8,7 +8,8 @@ const {
   approximately,
   isNaN,
   isNull,
-  isOk
+  isOk,
+  isNotOk
 } = require('chai').assert;
 
 describe('Line', function() {
@@ -27,28 +28,19 @@ describe('Line', function() {
     it('should validate if the other line given and the existing lines are equal', function() {
       const line1 = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
       const line2 = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
-      const actual = line1.isEqualTo(line2);
-      const expected = true;
-
-      strictEqual(actual, expected);
+      isOk(line1.isEqualTo(line2));
     });
 
     it('should invalidate if the other line given and the existing lines are not equal', function() {
       const line1 = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
       const line2 = new Line({ x: 1, y: 3 }, { x: 3, y: 5 });
-      const actual = line1.isEqualTo(line2);
-      const expected = false;
-
-      strictEqual(actual, expected);
+      isNotOk(line1.isEqualTo(line2));
     });
 
     it('should invalidate if the object given is not an instance of line', function() {
       const line1 = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
       const lineLikeObject = { endA: { x: 1, y: 2 }, endB: { x: 4, y: 5 } };
-      const actual = line1.isEqualTo(lineLikeObject);
-      const expected = false;
-
-      strictEqual(actual, expected);
+      isNotOk(line1.isEqualTo(lineLikeObject));
     });
   });
 
@@ -56,33 +48,25 @@ describe('Line', function() {
     it('should invalidate if the other object given is not an instance of Line', function() {
       const line1 = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
       const lineLikeObject = { endA: { x: 1, y: 2 }, endB: { x: 4, y: 5 } };
-      const actual = line1.isParallelTo(lineLikeObject);
-      const expected = false;
-      strictEqual(actual, expected);
+      isNotOk(line1.isParallelTo(lineLikeObject));
     });
 
     it('should validate if the both lines are parallel', function() {
       const line1 = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
       const line2 = new Line({ x: 1, y: 4 }, { x: 4, y: 7 });
-      const actual = line1.isParallelTo(line2);
-      const expected = true;
-      strictEqual(actual, expected);
+      isOk(line1.isParallelTo(line2));
     });
 
     it('should invalidate if the both lines are not parallel', function() {
       const line1 = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
       const line2 = new Line({ x: 1, y: 8 }, { x: 3, y: 5 });
-      const actual = line1.isParallelTo(line2);
-      const expected = false;
-      strictEqual(actual, expected);
+      isNotOk(line1.isParallelTo(line2));
     });
 
     it('should invalidate if the both lines have same end points and slope', function() {
       const line1 = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
       const line2 = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
-      const actual = line1.isParallelTo(line2);
-      const expected = false;
-      strictEqual(actual, expected);
+      isNotOk(line1.isParallelTo(line2));
     });
   });
 
@@ -183,13 +167,13 @@ describe('Line', function() {
     it('should validate if the given point is in the line', function() {
       const line = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
       const point1 = new Point(2, 3);
-      strictEqual(line.hasPoint(point1), true);
+      isOk(line.hasPoint(point1));
     });
 
     it('should invalidate if the given point is not in the line', function() {
       const line = new Line({ x: 2, y: 2 }, { x: 4, y: 4 });
       const point = new Point(2, 3);
-      strictEqual(line.hasPoint(point), false);
+      isNotOk(line.hasPoint(point));
     });
   });
 
