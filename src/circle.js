@@ -26,7 +26,9 @@ class Circle {
     return false;
   }
 
-  
+  moveTo(newCentre) {
+    return new Circle(newCentre, this.radius);
+  }
 
   get area() {
     return Math.PI * this.radius * this.radius;

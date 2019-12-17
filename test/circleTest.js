@@ -63,4 +63,13 @@ describe('Circle', function() {
       isNotOk(circle.hasPoint(point));
     });
   });
+
+  describe('moveTo', function() {
+    it('should change the centre point to the given point', function() {
+      const circle1 = new Circle({ x: 0, y: 0 }, 5);
+      const circle2 = new Circle({ x: 1, y: 2 }, 5);
+      const newCentre = { x: 1, y: 2 };
+      isOk(circle2.isEqualTo(circle1.moveTo(newCentre)));
+    });
+  });
 });

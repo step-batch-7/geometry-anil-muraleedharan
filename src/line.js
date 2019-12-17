@@ -38,7 +38,6 @@ class Line {
     if (other instanceof Line) {
       const areEndAEqual = this.endA.isEqualTo(other.endA);
       const areEndBEqual = this.endB.isEqualTo(other.endB);
-
       return areEndAEqual && areEndBEqual;
     }
     return false;
@@ -96,11 +95,7 @@ class Line {
   }
 
   get length() {
-    const xCordDifference = this.endA.x - this.endB.x;
-    const yCordDifference = this.endA.y - this.endB.y;
-    const xCordDifferenceSquare = xCordDifference * xCordDifference;
-    const yCordDifferenceSquare = yCordDifference * yCordDifference;
-    return Math.sqrt(xCordDifferenceSquare + yCordDifferenceSquare);
+    return this.endA.findDistanceTo(this.endB);
   }
 
   get slope() {
