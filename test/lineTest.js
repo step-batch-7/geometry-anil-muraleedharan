@@ -121,16 +121,12 @@ describe('Line', function() {
       strictEqual(line.slope, expectedSlope);
     });
 
-    it('should give "Infinity" as slope if x-cords of both ends are equal and difference of y-cords is positive', function() {
-      const line = new Line({ x: 1, y: 6 }, { x: 1, y: 2 });
-      const expectedSlope = Infinity;
-      strictEqual(line.slope, expectedSlope);
-    });
+    it('Should give infinity when the line is parallel to y-axis', () => {
+      let line = new Line({ x: 3, y: 8 }, { x: 3, y: 6 });
+      strictEqual(line.slope, -Infinity);
 
-    it('should give "-Infinity" as slope if x-cords of both ends are equal and difference of y-cords is negative', function() {
-      const line = new Line({ x: 1, y: 2 }, { x: 1, y: 6 });
-      const expectedSlope = -Infinity;
-      strictEqual(line.slope, expectedSlope);
+      line = new Line({ x: 4, y: 3 }, { x: 4, y: 4 });
+      strictEqual(line.slope, Infinity);
     });
   });
 
@@ -152,6 +148,12 @@ describe('Line', function() {
       const line = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
       strictEqual(line.findX(4), 3);
     });
+
+    it('Should give a x coordinate if the Line is perpendicular to y axis', () => {
+      const line = new Line({ x: 3, y: 5 }, { x: 9, y: 5 });
+      strictEqual(line.findX(5), 5);
+    });
+
     it('should give NaN if the given y-cord is not in line', function() {
       const line = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
       isNaN(line.findX(7));
@@ -163,6 +165,12 @@ describe('Line', function() {
       const line = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
       strictEqual(line.findY(3), 4);
     });
+
+    it('Should give y coordinate if the Line is perpendicular to x axis', () => {
+      const line = new Line({ x: 3, y: 5 }, { x: 3, y: 1 });
+      strictEqual(line.findY(3), 5);
+    });
+
     it('should give NaN if the given x-cord is not in line', function() {
       const line = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
       isNaN(line.findY(7));

@@ -65,19 +65,15 @@ class Line {
   }
 
   findX(yCord) {
-    if (isValueInRange(this.endA.y, this.endB.y, yCord)) {
-      const yIntersect = getYIntersect(this.endA, this.slope);
-      return (yCord - yIntersect) / this.slope;
-    }
-    return NaN;
+    if (!isValueInRange(this.endA.y, this.endB.y, yCord)) return NaN;
+    if (this.slope == 0) return this.endA.y;
+    return (yCord - getYIntersect(this.endA, this.slope)) / this.slope;
   }
 
   findY(xCord) {
-    if (isValueInRange(this.endA.x, this.endB.x, xCord)) {
-      const yIntersect = getYIntersect(this.endA, this.slope);
-      return this.slope * xCord + yIntersect;
-    }
-    return NaN;
+    if (!isValueInRange(this.endA.x, this.endB.x, xCord)) return NaN;
+    if (this.slope == Infinity || this.slope == -Infinity) return this.endA.y;
+    return this.slope * xCord + getYIntersect(this.endA, this.slope);
   }
 
   hasPoint(point) {
@@ -106,8 +102,8 @@ class Line {
   }
 
   get slope() {
-    const xCordDifference = this.endA.x - this.endB.x;
-    const yCordDifference = this.endA.y - this.endB.y;
+    const xCordDifference = this.endB.x - this.endA.x;
+    const yCordDifference = this.endB.y - this.endA.y;
     return yCordDifference / xCordDifference;
   }
 }
