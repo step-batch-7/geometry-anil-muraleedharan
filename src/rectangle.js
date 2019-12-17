@@ -1,28 +1,58 @@
 const Point = require('../src/point');
+const Line = require('../src/line');
 
-const getDimension = function(diagonalEndA, diagonalEndB) {
-  const length = Math.abs(diagonalEndA.x - diagonalEndB.x);
-  const breadth = Math.abs(diagonalEndA.y - diagonalEndB.y);
+const getDimension = function(diagonalEndA, diagonalEndC) {
+  const length = Math.abs(diagonalEndA.x - diagonalEndC.x);
+  const breadth = Math.abs(diagonalEndA.y - diagonalEndC.y);
   return { length: length, breadth: breadth };
 };
 
+const getSides = function(pointA, pointC) {
+  const ab = new Line(pointA, { x: pointC.x, y: pointA.y });
+  const bc = new Line({ x: pointC.x, y: pointA.y }, pointC);
+  const cd = new Line(pointC, { x: pointA.x, y: pointC.y });
+  const da = new Line({ x: pointA.x, y: pointC.y }, pointA);
+  return { AB: ab, BC: bc, CD: cd, DA: da };
+};
+
 class Rectangle {
-  constructor(diagonalEndA, diagonalEndB) {
+  constructor(diagonalEndA, diagonalEndC) {
     this.diagonalEndA = new Point(diagonalEndA.x, diagonalEndA.y);
-    this.diagonalEndB = new Point(diagonalEndB.x, diagonalEndB.y);
+    this.diagonalEndC = new Point(diagonalEndC.x, diagonalEndC.y);
   }
 
   toString() {
-    return `[Rectangle (${this.diagonalEndA.x}, ${this.diagonalEndA.y}) to (${this.diagonalEndB.x}, ${this.diagonalEndB.y})]`;
+    return `[Rectangle (${this.diagonalEndA.x}, ${this.diagonalEndA.y}) to (${this.diagonalEndC.x}, ${this.diagonalEndC.y})]`;
+  }
+
+  isEqualTo(other) {
+    if (other instanceof Rectangle) {
+      return (
+        this.diagonalEndA.isEqualTo(other.diagonalEndA) &&
+        this.diagonalEndC.isEqualTo(other.diagonalEndC)
+      );
+    }
+    return false;
+  }
+
+  hasPoint(point) {
+    if (!(point instanceof Point)) return false;
+    const sides = getSides(this.diagonalEndA, this.diagonalEndC);
+    return (
+      sides.AB.hasPoint(point) ||
+      sides.BC.hasPoint(point) ||
+      sides.CD.hasPoint(point) ||
+      sides.DA.hasPoint(point)
+    );
   }
 
   get area() {
-    const dimension = getDimension(this.diagonalEndA, this.diagonalEndB);
+    const dimension = getDimension(this.diagonalEndA, this.diagonalEndC);
     return dimension.length * dimension.breadth;
   }
 
   get perimeter() {
-    const dimension = getDimension(this.diagonalEndA, this.diagonalEndB);
+    const dimension = getDimension(this.diagonalEndA, this.diagonalEndC);
     return 2 * (dimension.length + dimension.breadth);
   }
 }

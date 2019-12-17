@@ -77,11 +77,11 @@ describe('Line', function() {
       strictEqual(actual, expected);
     });
 
-    it('should validate if the both lines have same end points and slope', function() {
+    it('should invalidate if the both lines have same end points and slope', function() {
       const line1 = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
       const line2 = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
       const actual = line1.isParallelTo(line2);
-      const expected = true;
+      const expected = false;
       strictEqual(actual, expected);
     });
   });

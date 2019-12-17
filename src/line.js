@@ -22,6 +22,13 @@ const getCoordinate = function(distanceRatio, end1Cord, end2Cord) {
   return (1 - distanceRatio) * end1Cord + distanceRatio * end2Cord;
 };
 
+const areCollinear = function(pointA, pointB, pointC) {
+  const [x1, y1] = [pointA.x, pointA.y];
+  const [x2, y2] = [pointB.x, pointB.y];
+  const [x3, y3] = [pointC.x, pointC.y];
+  return x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2) == 0;
+};
+
 class Line {
   constructor(endA, endB) {
     this.endA = new Point(endA.x, endA.y);
@@ -45,7 +52,10 @@ class Line {
 
   isParallelTo(other) {
     if (other instanceof Line) {
-      return this.slope === other.slope;
+      return (
+        this.slope === other.slope &&
+        !areCollinear(this.endA, this.endB, other.endA)
+      );
     }
     return false;
   }
@@ -74,12 +84,11 @@ class Line {
   }
 
   hasPoint(point) {
-    const yIntersect = getYIntersect(this.endA, this.slope);
-    const isPointSatisfiesLineEqn =
-      point.y === this.slope * point.x + yIntersect;
-    const isXCordInLine = isValueInRange(this.endA.x, this.endB.x, point.x);
-    const isYCordInLine = isValueInRange(this.endA.y, this.endB.y, point.y);
-    return isXCordInLine && isYCordInLine && isPointSatisfiesLineEqn;
+    const areXInLine = isValueInRange(this.endA.x, this.endB.x, point.x);
+    const areYInLine = isValueInRange(this.endA.y, this.endB.y, point.y);
+    return (
+      areXInLine && areYInLine && areCollinear(this.endA, this.endB, point)
+    );
   }
 
   findPointFromStart(distance) {
