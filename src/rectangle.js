@@ -20,6 +20,11 @@ class Rectangle {
     const dimension = getDimension(this.diagonalEndA, this.diagonalEndB);
     return dimension.length * dimension.breadth;
   }
+
+  get perimeter() {
+    const dimension = getDimension(this.diagonalEndA, this.diagonalEndB);
+    return 2 * (dimension.length + dimension.breadth);
+  }
 }
 
 module.exports = Rectangle;
