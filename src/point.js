@@ -32,8 +32,8 @@ class Point {
     return NaN;
   }
 
-  isOn(line) {
-    return line.hasPoint(this);
+  isOn(shape) {
+    return shape.hasPoint(this);
   }
 
   clone() {

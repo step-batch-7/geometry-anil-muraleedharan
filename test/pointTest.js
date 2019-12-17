@@ -2,12 +2,14 @@
 
 const Point = require('../src/point');
 const Line = require('../src/line');
+const Circle = require('../src/circle');
 const {
   strictEqual,
   deepStrictEqual,
   approximately,
   isNaN,
-  isOk
+  isOk,
+  isNotOk
 } = require('chai').assert;
 
 describe('Point', function() {
@@ -109,6 +111,18 @@ describe('Point', function() {
       const line1 = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
       const point1 = new Point(7, 3);
       strictEqual(point1.isOn(line1), false);
+    });
+
+    it('should validate if the point is on the circumference of the given circle', function() {
+      const circle = new Circle({ x: 0, y: 0 }, 5);
+      const point = new Point(0, 5);
+      isOk(point.isOn(circle));
+    });
+
+    it('should invalidate if the point is not on the circumference of the circle', function() {
+      const circle = new Circle({ x: 0, y: 0 }, 5);
+      const point = new Point(0, 8);
+      isNotOk(point.isOn(circle));
     });
   });
 });
