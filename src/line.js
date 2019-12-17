@@ -42,22 +42,19 @@ class Line {
   }
 
   isEqualTo(other) {
-    if (other instanceof Line) {
-      const areEndAEqual = this.endA.isEqualTo(other.endA);
-      const areEndBEqual = this.endB.isEqualTo(other.endB);
-      return areEndAEqual && areEndBEqual;
-    }
-    return false;
+    if (!other instanceof Line) return false;
+    return (
+      (this.endA.isEqualTo(other.endA) && this.endB.isEqualTo(other.endB)) ||
+      (this.endA.isEqualTo(other.endB) && this.endB.isEqualTo(other.endA))
+    );
   }
 
   isParallelTo(other) {
-    if (other instanceof Line) {
-      return (
-        this.slope === other.slope &&
-        !areCollinear(this.endA, this.endB, other.endA)
-      );
-    }
-    return false;
+    if (!other instanceof Line) return false;
+    return (
+      this.slope === other.slope &&
+      !areCollinear(this.endA, this.endB, other.endA)
+    );
   }
 
   split() {

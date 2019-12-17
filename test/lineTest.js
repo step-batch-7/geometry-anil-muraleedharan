@@ -31,6 +31,12 @@ describe('Line', function() {
       isOk(line1.isEqualTo(line2));
     });
 
+    it('should validate if the other line given and the existing lines are equal but in reverse order', function() {
+      const line1 = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
+      const line2 = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
+      isOk(line1.isEqualTo(line2));
+    });
+
     it('should invalidate if the other line given and the existing lines are not equal', function() {
       const line1 = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
       const line2 = new Line({ x: 1, y: 3 }, { x: 3, y: 5 });
