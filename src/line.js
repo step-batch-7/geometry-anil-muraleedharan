@@ -32,9 +32,7 @@ class Line {
   }
 
   toString() {
-    const endA = `(${this.endA.x},${this.endA.y})`;
-    const endB = `(${this.endB.x},${this.endB.y})`;
-    return `[Line ${endA} to ${endB}]`;
+    return `[Line (${this.endA.x},${this.endA.y}) to (${this.endB.x},${this.endB.y})]`;
   }
 
   isEqualTo(other) {
