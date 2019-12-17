@@ -22,7 +22,7 @@ class Rectangle {
   }
 
   toString() {
-    return `[Rectangle (${this.diagonalEndA.x}, ${this.diagonalEndA.y}) to (${this.diagonalEndC.x}, ${this.diagonalEndC.y})]`;
+    return `[Rectangle (${this.diagonalEndA.x},${this.diagonalEndA.y}) to (${this.diagonalEndC.x},${this.diagonalEndC.y})]`;
   }
 
   isEqualTo(other) {

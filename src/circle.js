@@ -7,7 +7,7 @@ class Circle {
   }
 
   toString() {
-    return `[Circle @(${this.centre.x}, ${this.centre.y}) radius ${this.radius}]`;
+    return `[Circle @(${this.centre.x},${this.centre.y}) radius ${this.radius}]`;
   }
 
   isEqualTo(other) {

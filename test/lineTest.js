@@ -183,6 +183,16 @@ describe('Line', function() {
       const expectedPoint = new Point(1, 4);
       isOk(expectedPoint.isEqualTo(line.findPointFromStart(2)));
     });
+
+    it('should give null if the distance given is greater than the length', function() {
+      const line = new Line({ x: 1, y: 2 }, { x: 1, y: 8 });
+      isNull(line.findPointFromStart(8));
+    });
+
+    it('should give null if the given distance is negative', function() {
+      const line = new Line({ x: 1, y: 2 }, { x: 1, y: 8 });
+      isNull(line.findPointFromStart(-1));
+    });
   });
 
   describe('findPointFromEnd', function() {

@@ -93,6 +93,7 @@ class Line {
 
   findPointFromStart(distance) {
     const distanceRatio = distance / this.length;
+    if (!isValueInRange(0, 1, distanceRatio)) return null;
     const xCord = getCoordinate(distanceRatio, this.endA.x, this.endB.x);
     const yCord = getCoordinate(distanceRatio, this.endA.y, this.endB.y);
     return new Point(xCord, yCord);
