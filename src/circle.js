@@ -19,6 +19,15 @@ class Circle {
     return false;
   }
 
+  hasPoint(point) {
+    if (point instanceof Point) {
+      return this.centre.findDistanceTo(point) === this.radius;
+    }
+    return false;
+  }
+
+  
+
   get area() {
     return Math.PI * this.radius * this.radius;
   }

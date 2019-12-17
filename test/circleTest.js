@@ -1,4 +1,5 @@
 const Circle = require('../src/circle');
+const Point = require('../src/point');
 const { strictEqual, deepStrictEqual, isOk, isNotOk } = require('chai').assert;
 
 describe('Circle', function() {
@@ -40,6 +41,26 @@ describe('Circle', function() {
     it('should give the perimeter of the circle', function() {
       const circle1 = new Circle({ x: 1, y: 2 }, 5);
       strictEqual(circle1.perimeter, 31.41592653589793);
+    });
+  });
+
+  describe('hasPoint', function() {
+    it('should invalidate if the given object is not an instance of point', function() {
+      const circle = new Circle({ x: 0, y: 0 }, 5);
+      const pointLikeObject = { x: 0, y: 5 };
+      isNotOk(circle.hasPoint(pointLikeObject));
+    });
+
+    it('should validate if the given point is on the circumference of the circle', function() {
+      const circle = new Circle({ x: 0, y: 0 }, 5);
+      const point = new Point(0, 5);
+      isOk(circle.hasPoint(point));
+    });
+
+    it('should invalidate if the given point is not on the circumference of the circle', function() {
+      const circle = new Circle({ x: 0, y: 0 }, 5);
+      const point = new Point(0, 8);
+      isNotOk(circle.hasPoint(point));
     });
   });
 });
