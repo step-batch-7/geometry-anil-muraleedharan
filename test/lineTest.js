@@ -123,7 +123,7 @@ describe('Line', function() {
 
     it('Should give infinity when the line is parallel to y-axis', () => {
       let line = new Line({ x: 3, y: 8 }, { x: 3, y: 6 });
-      strictEqual(line.slope, Infinity);
+      strictEqual(line.slope, -Infinity);
 
       line = new Line({ x: 4, y: 3 }, { x: 4, y: 4 });
       strictEqual(line.slope, Infinity);

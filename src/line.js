@@ -98,7 +98,6 @@ class Line {
 
   get slope() {
     const slope = (this.endB.y - this.endA.y) / (this.endB.x - this.endA.x);
-    if (slope === -Infinity) return Infinity;
     return slope;
   }
 }
