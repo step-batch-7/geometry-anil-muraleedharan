@@ -60,7 +60,7 @@ class Line {
 
   findX(yCord) {
     if (!isValueInRange(this.endA.y, this.endB.y, yCord)) return NaN;
-    if (this.slope == 0) return this.endA.y;
+    if (this.slope == 0) return this.endA.x;
     return (yCord - getYIntersect(this.endA, this.slope)) / this.slope;
   }
 

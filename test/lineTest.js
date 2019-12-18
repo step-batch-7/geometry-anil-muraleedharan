@@ -149,9 +149,9 @@ describe('Line', function() {
       strictEqual(line.findX(4), 3);
     });
 
-    it('Should give a x coordinate if the Line is perpendicular to y axis', () => {
+    it('Should give any of the x coordinate if the Line is parallel to x axis', () => {
       const line = new Line({ x: 3, y: 5 }, { x: 9, y: 5 });
-      strictEqual(line.findX(5), 5);
+      strictEqual(line.findX(5), 3);
     });
 
     it('should give NaN if the given y-cord is not in line', function() {
@@ -166,7 +166,7 @@ describe('Line', function() {
       strictEqual(line.findY(3), 4);
     });
 
-    it('Should give y coordinate if the Line is perpendicular to x axis', () => {
+    it('Should give any of the y coordinate if the Line is parallel to y axis', () => {
       const line = new Line({ x: 3, y: 5 }, { x: 3, y: 1 });
       strictEqual(line.findY(3), 5);
     });
