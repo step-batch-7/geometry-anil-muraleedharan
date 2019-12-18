@@ -1,38 +1,38 @@
 const Point = require('../src/point');
 
 class Circle {
-  constructor(centre, radius) {
-    this.centre = new Point(centre.x, centre.y);
+  constructor(center, radius) {
+    this.center = new Point(center.x, center.y);
     this.radius = radius;
   }
 
   toString() {
-    return `[Circle @(${this.centre.x},${this.centre.y}) radius ${this.radius}]`;
+    return `[Circle @(${this.center.x},${this.center.y}) radius ${this.radius}]`;
   }
 
   isEqualTo(other) {
     if (other instanceof Circle) {
-      const isCentreEqual = this.centre.isEqualTo(other.centre);
+      const isCenterEqual = this.center.isEqualTo(other.center);
       const isRadiusEqual = this.radius === other.radius;
-      return isCentreEqual && isRadiusEqual;
+      return isCenterEqual && isRadiusEqual;
     }
     return false;
   }
 
   hasPoint(point) {
     if (point instanceof Point) {
-      return this.centre.findDistanceTo(point) === this.radius;
+      return this.center.findDistanceTo(point) === this.radius;
     }
     return false;
   }
 
-  moveTo(newCentre) {
-    return new Circle(newCentre, this.radius);
+  moveTo(newCenter) {
+    return new Circle(newCenter, this.radius);
   }
 
   covers(point) {
     if (point instanceof Point) {
-      return this.centre.findDistanceTo(point) < this.radius;
+      return this.center.findDistanceTo(point) < this.radius;
     }
     return false;
   }

@@ -8,10 +8,6 @@ const getMidPoint = function(pointA, pointB) {
   return { x: midXCord, y: midYCord };
 };
 
-const getYIntersect = function(point, slope) {
-  return point.y - slope * point.x;
-};
-
 const isValueInRange = function(limit1, limit2, value) {
   const minLimit = Math.min(limit1, limit2);
   const maxLimit = Math.max(limit1, limit2);
@@ -61,13 +57,13 @@ class Line {
   findX(yCord) {
     if (!isValueInRange(this.endA.y, this.endB.y, yCord)) return NaN;
     if (this.slope == 0) return this.endA.x;
-    return (yCord - getYIntersect(this.endA, this.slope)) / this.slope;
+    return (yCord - this.endA.y) / this.slope + this.endA.x;
   }
 
   findY(xCord) {
     if (!isValueInRange(this.endA.x, this.endB.x, xCord)) return NaN;
     if (this.slope == Infinity || this.slope == -Infinity) return this.endA.y;
-    return this.slope * xCord + getYIntersect(this.endA, this.slope);
+    return (xCord - this.endA.x) * this.slope + this.endA.y;
   }
 
   hasPoint(point) {

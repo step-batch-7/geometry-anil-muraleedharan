@@ -25,7 +25,7 @@ describe('Circle', function() {
 
     it('should invalidate if the object given is not an instance of circle', function() {
       const circle1 = new Circle({ x: 1, y: 2 }, 5);
-      const circleLikeObject = { centre: { x: 1, y: 2 }, radius: 5 };
+      const circleLikeObject = { center: { x: 1, y: 2 }, radius: 5 };
       isNotOk(circle1.isEqualTo(circleLikeObject));
     });
   });
@@ -65,11 +65,11 @@ describe('Circle', function() {
   });
 
   describe('moveTo', function() {
-    it('should change the centre point to the given point', function() {
+    it('should change the center point to the given point', function() {
       const circle1 = new Circle({ x: 0, y: 0 }, 5);
       const circle2 = new Circle({ x: 1, y: 2 }, 5);
-      const newCentre = { x: 1, y: 2 };
-      isOk(circle2.isEqualTo(circle1.moveTo(newCentre)));
+      const newCenter = { x: 1, y: 2 };
+      isOk(circle2.isEqualTo(circle1.moveTo(newCenter)));
     });
   });
 
