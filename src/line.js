@@ -71,6 +71,7 @@ class Line {
   }
 
   hasPoint(point) {
+    if (!(point instanceof Point)) return false;
     const areXInLine = isValueInRange(this.endA.x, this.endB.x, point.x);
     const areYInLine = isValueInRange(this.endA.y, this.endB.y, point.y);
     return (

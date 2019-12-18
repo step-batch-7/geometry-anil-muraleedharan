@@ -178,6 +178,12 @@ describe('Line', function() {
   });
 
   describe('hasPoint', function() {
+    it('should invalidate if the given object given is not an instance of point', function() {
+      const line = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
+      const pointLikeObject = { x: 2, y: 3 };
+      isNotOk(line.hasPoint(pointLikeObject));
+    });
+
     it('should validate if the given point is in the line', function() {
       const line = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
       const point1 = new Point(2, 3);
